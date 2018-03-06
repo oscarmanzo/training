@@ -1,19 +1,25 @@
 package com.globant.google.nest;
 
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-
 public class Cracking02 {
     
     public static void main(String[] args) {
 	    Cracking02 app = new Cracking02();
 	    
-	    byte[] cStyle = app.toCstyle("oscar");
-	    System.out.println(Arrays.toString(cStyle));
+	    char[] cstyle = app.toCStyleReverse("oscar");
+	    System.out.println(String.valueOf(cstyle) +":"+ cstyle.length);
     }
     
-    public byte[] toCstyle(String value){
-        byte[] bytes = value.getBytes(StandardCharsets.US_ASCII);
-        return bytes;
+    public char[] toCStyleReverse(String value){
+
+        char[] chars = value.toCharArray();
+        char[] charsNew = new char[chars.length + 1];
+        
+        for (int i=chars.length-1, j = 0; i>=0; i--, j++){
+            charsNew[j] = chars[i];
+        }
+        
+        charsNew[charsNew.length-1] = '\0';
+        
+        return charsNew;
     }
 }
