@@ -1,5 +1,9 @@
 package com.globant.google.nest;
 
+/**
+ * 1.5 Write a method to replace all spaces in a string with ‘%20’.
+ * O(2n) = O(n) : dos ciclos de la coleccion
+ **/
 public class Cracking05 {
 
     private static final char CHAR_SPACE = ' ';

@@ -1,5 +1,9 @@
 package com.globant.google.nest;
 
+/**
+ * 1.3 Design an algorithm and write code to remove the duplicate characters in a string without using any additional buffer.
+ * O(n): Recorrido de caracteres, con ciclo interno pero decremento de contador
+ **/
 public class Cracking03 {
 
     private static final char DEFAULT = '\u0000';

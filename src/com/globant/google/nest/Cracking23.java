@@ -1,5 +1,9 @@
 package com.globant.google.nest;
 
+/**
+ * 2.3 Implement an algorithm to delete a node in the middle of a single linked list, given only access to that node.
+ * O(2n) => O(n) : dos ciclos para ubicar el elemento
+ **/
 public class Cracking23 {
 
     public static void main(String[] args){

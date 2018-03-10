@@ -1,5 +1,9 @@
 package com.globant.google.nest;
 
+/**
+ * 1.1 Implement an algorithm to determine if a string has all unique characters.
+ * O(n): Recorrido de caracteres
+ **/
 public class Cracking01 {
     
     public static void main(String[] args) {
@@ -7,10 +11,6 @@ public class Cracking01 {
 	    System.out.println(app.uniqueCharacters("oscar"));	    
     }
 
-    /**
-     * 1.1 Implement an algorithm to determine if a string has all unique characters.
-     * What if you can not use additional data structures?
-     **/
     public boolean uniqueCharacters(String value){
         boolean unique = true;
         

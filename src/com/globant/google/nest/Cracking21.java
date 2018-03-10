@@ -1,5 +1,9 @@
 package com.globant.google.nest;
 
+/**
+ * 2.1 Write code to remove duplicates from an unsorted linked list.
+ * O(n) : se cuenta con 4 ciclos de la coleccion
+ */
 public class Cracking21 {
 
     public static void main(String[] args){

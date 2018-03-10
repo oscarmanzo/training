@@ -1,5 +1,9 @@
 package com.globant.google.nest;
 
+/**
+ * Lectura de Arbol Inorder
+ * O(log n) :  recorrido de arbol
+ **/
 public class InorderApp {
 
     public static void main(String[] args){

@@ -1,5 +1,12 @@
 package com.globant.google.nest;
 
+/**
+ * 2.4 You have two numbers represented by a linked list, where each node contains a single digit.
+ * The digits are stored in reverse order, such that the 1’s digit is at the head of the list.
+ * Write a function that adds the two numbers and returns the sum as a linked list.
+ * 
+ * O(2n) + O(n) => O(n) : dos invocaciones de ciclo para formar un numero, un ciclo para transformacion de numero a lista
+ **/
 public class Cracking24 {
 
     public static void main(String[] args){

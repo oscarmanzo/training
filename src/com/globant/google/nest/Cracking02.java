@@ -1,5 +1,10 @@
 package com.globant.google.nest;
 
+
+/**
+ * 1.2 Write code to reverse a C-Style String.
+ * O(n): Recorrido de caracteres 
+ **/
 public class Cracking02 {
     
     public static void main(String[] args) {

@@ -1,5 +1,9 @@
 package com.globant.google.nest;
 
+/**
+ * 1.4 Write a method to decide if two strings are anagrams or not.
+ * O(n^2): recorrido de caracteres adicional un ciclo que vuelve a evaluar todos los caracteres
+ **/
 public class Cracking04 {
 
     public static void main(String[] args){

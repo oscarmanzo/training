@@ -1,5 +1,9 @@
 package com.globant.google.nest;
 
+/**
+ * 2.2 Implement an algorithm to find the nth to last element of a singly linked list.
+ * O(n) :  recorrido simple de los nodos
+ **/
 public class Cracking22 {
 
     public static void main(String[] args){
