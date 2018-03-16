@@ -4,8 +4,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Map;
+import java.util.Random;
+import java.util.Calendar;
 import static java.util.Comparator.*;
 import static java.util.stream.Collectors.*;
+import java.util.stream.Stream;
 
 public class StreamApp {
 
@@ -41,6 +44,12 @@ public class StreamApp {
         app.totalNumberCharacters();
         System.out.println("---------------------------------");        
         app.wordsContainLetter();
+        System.out.println("---------------------------------");        
+        app.squareRoots();        
+        System.out.println("---------------------------------");        
+        app.squareRootsParallel();
+        System.out.println("---------------------------------");
+        app.infiniteStream();
     }
 
     /**
@@ -203,6 +212,72 @@ public class StreamApp {
         List<String> words = buildListWords();
         long count = words.stream().filter(s->s.contains("h")).count();
         System.out.println("wordsContainLetter: "+ count);
+    }
+
+    /**
+     * Compute the sum of the square roots of the numbers in the array.
+     * Find a shorter and simpler way than making a loop to tally the sum.
+     * Hint: review the notes on number-specialized streams,
+     * especially the fact that you make a DoubleStream from a double[] with DoubleStream.of, not Stream.of.
+     */
+    public void squareRoots(){
+        double[] numbers = getArrayDouble();
+        List<Double> list = Arrays.stream(numbers).boxed().collect(toList());
+
+        long start = Calendar.getInstance().getTimeInMillis();
+        double sum = list.stream().map(Math::sqrt).collect(summingDouble(Double::doubleValue));
+        long end = Calendar.getInstance().getTimeInMillis();
+        System.out.println("sum of the square roots: "+ sum);
+        System.out.println("squareRoots -> time :"+ (end - start));
+    }
+
+    /**
+     * Repeat the process in parallel.
+     * Once you have #2 working, this should be very simple.
+     */
+    public void squareRootsParallel(){
+        double[] numbers = getArrayDouble();
+        List<Double> list = Arrays.stream(numbers).boxed().collect(toList());
+
+        long startParallel = Calendar.getInstance().getTimeInMillis();
+        double sum = list.parallelStream().map(Math::sqrt).collect(summingDouble(Double::doubleValue));
+        long endParallel = Calendar.getInstance().getTimeInMillis();
+        System.out.println("parallel sum of the square roots: "+ sum);
+        System.out.println("squareRootsParallel -> time :"+ (endParallel - startParallel));
+    
+        /**
+         * Verify that you get the "same" answer with the parallel approach as with the sequential approach.
+         * Why do I have "same" in quotes in the previous sentence?
+         */
+
+        /**
+         * Test whether the parallel approach is faster than the sequential approach.
+         * Doing the timing is a little bit tedious, but if you think it simplifies things,
+         * you can steal the Op interface from streams-3-exercises project
+         */
+    }
+
+    private double[] getArrayDouble(){
+        return new Random().doubles(0, 1).limit(10000000).toArray();
+    }
+
+    /**
+     * Make an "infinite" stream that generates random doubles between 0 and 10. Use it to: 
+     * Print 5 random doubles
+     * Make a List of 10 random doubles
+     * Make an array of 20 random doubles 
+     */
+    public void infiniteStream(){
+        System.out.println("infiniteStream:");
+        Stream.generate(Math::random).limit(5).forEach(System.out::println);
+        
+        System.out.println("infiniteStream-list:");
+        List<Double> list10 = Stream.generate(Math::random).limit(10).collect(toList());
+        list10.stream().forEach(System.out::println);
+
+        System.out.println("infiniteStream-array:");
+        Double[] list20 = Stream.generate(Math::random).limit(20).toArray(Double[]::new);
+        System.out.println(Arrays.toString(list20));
     }
 
     private List<Person> buildListPersons(){
