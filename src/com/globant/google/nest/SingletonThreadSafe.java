@@ -7,7 +7,7 @@ public final class SingletonThreadSafe {
     private SingletonThreadSafe(){
     }
 
-    public static final SingletonThreadSafe getInstance(){
+    public static final synchronized SingletonThreadSafe getInstance(){
 
         if (INSTANCE==null)
             INSTANCE = create();
@@ -15,7 +15,7 @@ public final class SingletonThreadSafe {
         return INSTANCE;
     }
 
-    private synchronized static SingletonThreadSafe create(){
+    private static SingletonThreadSafe create(){
         return new SingletonThreadSafe();
     }
 
