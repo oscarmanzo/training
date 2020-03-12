@@ -158,7 +158,7 @@ public class StreamApp {
      */
     public void sumElements(){
         List<Integer> list = Arrays.asList(10, 20, 30, 40);        
-        int sum = list.stream().collect(summingInt(i -> i.intValue()));
+        int sum = list.stream().collect(summingInt(Integer::intValue));
         System.out.println("Suma valores:"+ sum);
     }
 
@@ -201,7 +201,7 @@ public class StreamApp {
      */
     public void totalNumberCharacters(){
         List<String> words = buildListWords();
-        int sum = words.stream().map(String::length).collect(summingInt(i -> i.intValue()));
+        int sum = words.stream().map(String::length).collect(summingInt(Integer::intValue));
         System.out.println("totalNumberCharacters: "+ sum);
     }
 
