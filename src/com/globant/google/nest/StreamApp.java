@@ -15,6 +15,8 @@ public class StreamApp {
     public static void main(String[] args){
         StreamApp app = new StreamApp();
 
+        app.test();
+
         app.collectionToUppercase();
         System.out.println("---------------------------------");
         app.filterCollection();
@@ -52,12 +54,102 @@ public class StreamApp {
         app.infiniteStream();
     }
 
+    public void test() {
+
+        // Autoboxing
+        Integer i = 10;
+        System.out.println(i);
+
+        Optional<Integer> op = Optional.ofNullable(i);
+        //op.get();
+
+        if (op.isPresent()) {
+            System.out.println("optional.get "+ op.get());
+        }
+
+        op.ifPresent(
+                o -> System.out.println("ifPresent:" + o)
+        );
+
+        System.out.println("orElse:" + op.orElse(1));
+
+        System.out.println("Nullable:orElse:" +
+                Optional.ofNullable(i)
+                        .map(x -> String.valueOf(x))
+                        .orElse("sin valor")
+        );
+
+        System.out.println("+++++++++++++++++++++++++++++++++++++");
+        String[] arr = {"1","2","3","44","55"};
+        List<String> list = Arrays.asList(arr);
+
+        list.parallelStream()
+                .filter(v -> v.length() == 1)
+                .forEach(System.out::println);
+
+        System.out.println("+++++++++++++++++++++++++++++++++++++");
+
+        Optional.ofNullable(list)
+                .map(a -> a.stream())
+                .get()
+                .filter(v -> v.length() == 1)
+                .forEach(System.out::println);
+
+        MyFuntional<String, Integer> l2 = (String s) -> Integer.parseInt(s);
+        MyFuntional<Double, Integer> l3 = (s) -> Integer.valueOf(s.intValue());
+        MyFuntional<String, String> l4 = s -> {
+            return s + "2";
+        };
+
+        Runnable r = () -> System.out.println("runnable running");
+        new Thread(r).run();
+
+        String x = apply(valor -> String.valueOf(valor), 5);
+        System.out.println(x);
+
+        String x2 = apply(valor -> String.valueOf(valor * 2), 5);
+        System.out.println(x2);
+
+        //=====================================
+        apply(
+                new MyFuntional<Integer, String>() {
+                    @Override
+                    public String myMapping(Integer o) {
+                        return String.valueOf(o);
+                    }
+                },
+            5
+        );
+
+        System.out.println(x);
+//IntStream.range(0, 100)
+
+        Arrays.stream(new String[]{"1","2","3","4","5"})
+                .map(s -> Integer.parseInt(s))
+                .filter(v -> (v % 2) == 0)
+                /*.flatMap(
+                        v ->  IntStream.range(v, v * 2)
+                )*/
+                .findAny()
+                .ifPresent(System.out::println);
+                /*.forEach(
+                        System.out::println
+                )*/
+        ;
+    }
+
+    public String apply(MyFuntional<Integer, String> myFuntional, Integer i) {
+        return myFuntional.myMapping(i);
+    }
+
     /**
      * Convert elements of a collection to upper case.
      */
     public void collectionToUppercase(){
         List<String> list = Arrays.asList("uno", "dos", "tres", "cuatro");
-        list.stream().map(String::toUpperCase).forEach(System.out::println);
+        list.stream()
+                .map(String::toUpperCase)
+                .forEach(System.out::println);
     }
 
     /**
@@ -65,7 +157,9 @@ public class StreamApp {
      */
     public void filterCollection(){
         List<String> list = Arrays.asList("hola", "chau", "marzo", "saraza");
-        list.stream().filter(s -> s.length()<=4).forEach(System.out::println);
+        list.stream()
+                .filter(s -> s.length()<=4)
+                .forEach(System.out::println);
     }
 
     /**
@@ -74,7 +168,9 @@ public class StreamApp {
     public void flattenMultidimensional(){
         List<List<String>> lists = Arrays.asList(Arrays.asList("A", "B", "C", "D"),
                                                  Arrays.asList("a", "b", "c", "d"));
-        lists.stream().flatMap(List::stream).forEach(System.out::println);
+        lists.stream()
+                .flatMap(List::stream)
+                .forEach(System.out::println);
     }
 
     /**
